@@ -1,0 +1,388 @@
+[gd_scene load_steps=40 format=3 uid="uid://cegtxegdjw1cm"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_h2v1n"]
+[ext_resource type="Texture2D" uid="uid://bl8j0678t1mna" path="res://human-pale-base-alpha.png" id="2_50rnv"]
+[ext_resource type="Script" path="res://Weapon.gd" id="3_b3gtk"]
+[ext_resource type="Script" path="res://FlashWhite.gd" id="3_dwl0b"]
+[ext_resource type="Texture2D" uid="uid://bydlarx8gqcv2" path="res://weapons-1-near-alpha.png" id="4_aavwd"]
+[ext_resource type="Texture2D" uid="uid://d16mbdbme8p8j" path="res://blade.png" id="4_ma3tr"]
+[ext_resource type="Script" path="res://WeaponAnimationPlayer.gd" id="5_56vpb"]
+[ext_resource type="Script" path="res://Health.gd" id="7_r0eu7"]
+[ext_resource type="Script" path="res://World.gd" id="8_0ijcc"]
+[ext_resource type="Script" path="res://Camera.gd" id="8_s7hsh"]
+[ext_resource type="Script" path="res://DungeonDoor.gd" id="9_67ogt"]
+[ext_resource type="Texture2D" uid="uid://c064xh0g722du" path="res://dungeon_tiles (1).png" id="10_aigvo"]
+[ext_resource type="Script" path="res://Inventory.gd" id="11_mxdkt"]
+[ext_resource type="PackedScene" uid="uid://cgtaq73uqdht7" path="res://item.tscn" id="12_1ddj6"]
+[ext_resource type="Texture2D" uid="uid://cshy8oao8t8bl" path="res://grass.png" id="13_lfnm0"]
+[ext_resource type="Script" path="res://Terrain.gd" id="14_ctkas"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pjbs0"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jffv0"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yuco"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rabem"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uh8r"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asv5b"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt3h3"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm2tv"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra3xe"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h45vn"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(32, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5lp7"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwjwt"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rfge"]
+atlas = ExtResource("2_50rnv")
+region = Rect2(32, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ol75a"]
+animations = [{
+"frames": [SubResource("AtlasTexture_jffv0"), SubResource("AtlasTexture_1yuco"), SubResource("AtlasTexture_rabem")],
+"loop": true,
+"name": &"PlayerDown",
+"speed": 5.0
+}, {
+"frames": [SubResource("AtlasTexture_5uh8r"), SubResource("AtlasTexture_asv5b"), SubResource("AtlasTexture_dt3h3")],
+"loop": true,
+"name": &"PlayerLeft",
+"speed": 5.0
+}, {
+"frames": [SubResource("AtlasTexture_sm2tv"), SubResource("AtlasTexture_ra3xe"), SubResource("AtlasTexture_h45vn")],
+"loop": true,
+"name": &"PlayerRight",
+"speed": 5.0
+}, {
+"frames": [SubResource("AtlasTexture_w5lp7"), SubResource("AtlasTexture_vwjwt"), SubResource("AtlasTexture_2rfge")],
+"loop": true,
+"name": &"PlayerUp",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oxxio"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="Animation" id="Animation_lbw0b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jo2ps"]
+resource_name = "boomerang"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-5, 50), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 18.8496, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bu8mi"]
+resource_name = "slash"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.09, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.80656, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.09, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(6, 12), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nb7k0"]
+resource_name = "stab"
+length = 0.15
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.08, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -3.14159, -3.14159, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.08, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8, 4), Vector2(8, 20), Vector2(8, 4), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0iyqp"]
+_data = {
+"RESET": SubResource("Animation_lbw0b"),
+"boomerang": SubResource("Animation_jo2ps"),
+"slash": SubResource("Animation_bu8mi"),
+"stab": SubResource("Animation_nb7k0")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfbm7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r03y4"]
+texture = ExtResource("13_lfnm0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ctenj"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_r03y4")
+
+[node name="Root" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Player" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 5
+script = ExtResource("1_h2v1n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_pjbs0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+frames = SubResource("SpriteFrames_ol75a")
+animation = &"PlayerDown"
+script = ExtResource("3_dwl0b")
+
+[node name="Equipment" type="Node2D" parent="Player"]
+
+[node name="Weapon" type="Area2D" parent="Player/Equipment"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("3_b3gtk")
+
+[node name="Blade" type="CollisionShape2D" parent="Player/Equipment/Weapon"]
+position = Vector2(8, -6)
+shape = SubResource("CapsuleShape2D_oxxio")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Equipment/Weapon/Blade"]
+position = Vector2(0, 1)
+rotation = 0.167552
+scale = Vector2(0.0269662, 0.0234924)
+z_index = 1
+texture = ExtResource("4_ma3tr")
+region_rect = Rect2(0, 16, 16, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Equipment/Weapon"]
+position = Vector2(8, 3)
+rotation = 2.35619
+z_index = 2
+texture = ExtResource("4_aavwd")
+region_enabled = true
+region_rect = Rect2(52, 197, 8, 8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Equipment/Weapon"]
+libraries = {
+"": SubResource("AnimationLibrary_0iyqp")
+}
+script = ExtResource("5_56vpb")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera")
+
+[node name="Health" type="Node2D" parent="Player"]
+script = ExtResource("7_r0eu7")
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+script = ExtResource("8_s7hsh")
+
+[node name="World" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("8_0ijcc")
+
+[node name="Overworld" type="Node2D" parent="World"]
+
+[node name="DungeonDoor" type="Area2D" parent="World/Overworld"]
+position = Vector2(-100, 0)
+script = ExtResource("9_67ogt")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Overworld/DungeonDoor"]
+texture = ExtResource("10_aigvo")
+region_enabled = true
+region_rect = Rect2(140, 210, 20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Overworld/DungeonDoor"]
+shape = SubResource("RectangleShape2D_jfbm7")
+
+[node name="DungeonDoor2" type="Area2D" parent="World/Overworld"]
+position = Vector2(100, 0)
+script = ExtResource("9_67ogt")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Overworld/DungeonDoor2"]
+texture = ExtResource("10_aigvo")
+region_enabled = true
+region_rect = Rect2(140, 210, 20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Overworld/DungeonDoor2"]
+shape = SubResource("RectangleShape2D_jfbm7")
+
+[node name="Terrain" type="TileMap" parent="World/Overworld"]
+tile_set = SubResource("TileSet_ctenj")
+format = 2
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+script = ExtResource("14_ctkas")
+
+[node name="Item" parent="World" instance=ExtResource("12_1ddj6")]
+position = Vector2(0, 50)
+descriptor = {
+"name": "Blade",
+"sprite": "res://blade.png"
+}
+
+[node name="Item2" parent="World" instance=ExtResource("12_1ddj6")]
+position = Vector2(0, 50)
+descriptor = {
+"name": "Blade",
+"sprite": "res://blade.png"
+}
+
+[node name="Item3" parent="World" instance=ExtResource("12_1ddj6")]
+position = Vector2(0, 50)
+descriptor = {
+"name": "Blade",
+"sprite": "res://blade.png"
+}
+
+[node name="Item4" parent="World" instance=ExtResource("12_1ddj6")]
+position = Vector2(0, 50)
+descriptor = {
+"name": "Blade",
+"sprite": "res://blade.png"
+}
+
+[node name="Item5" parent="World" instance=ExtResource("12_1ddj6")]
+position = Vector2(0, 50)
+descriptor = {
+"name": "Blade",
+"sprite": "res://blade.png"
+}
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Inventory" type="ItemList" parent="HUD"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2i(64, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+allow_reselect = true
+auto_height = true
+fixed_icon_size = Vector2i(64, 64)
+script = ExtResource("11_mxdkt")
